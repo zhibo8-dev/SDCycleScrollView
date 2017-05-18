@@ -36,6 +36,7 @@
 @implementation SDCollectionViewCell
 {
     __weak UILabel *_titleLabel;
+    UIView *bottomView;
 }
 
 
@@ -52,7 +53,7 @@
 - (void)setTitleLabelBackgroundColor:(UIColor *)titleLabelBackgroundColor
 {
     _titleLabelBackgroundColor = titleLabelBackgroundColor;
-    _titleLabel.backgroundColor = titleLabelBackgroundColor;
+    bottomView.backgroundColor = titleLabelBackgroundColor;
 }
 
 - (void)setTitleLabelTextColor:(UIColor *)titleLabelTextColor
@@ -76,6 +77,9 @@
 
 - (void)setupTitleLabel
 {
+    bottomView = [[UIView alloc] init];
+    [self.contentView addSubview:bottomView];
+    
     UILabel *titleLabel = [[UILabel alloc] init];
     _titleLabel = titleLabel;
     _titleLabel.hidden = YES;
@@ -105,11 +109,12 @@
         _titleLabel.frame = self.bounds;
     } else {
         _imageView.frame = self.bounds;
-        CGFloat titleLabelW = self.sd_width;
+        CGFloat titleLabelW = self.sd_width - _rightMargin - 12;
         CGFloat titleLabelH = _titleLabelHeight;
         CGFloat titleLabelX = 0;
         CGFloat titleLabelY = self.sd_height - titleLabelH;
         _titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
+        bottomView.frame = CGRectMake(titleLabelX, titleLabelY, self.sd_width, titleLabelH);
     }
 }
 
