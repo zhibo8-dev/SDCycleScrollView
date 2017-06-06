@@ -35,6 +35,7 @@
 @interface SDCollectionViewCell : UICollectionViewCell
 
 @property (assign, nonatomic) CGFloat rightMargin;
+@property (assign, nonatomic) BOOL isAd;
 
 @property (weak, nonatomic) UIImageView *imageView;
 @property (copy, nonatomic) NSString *title;

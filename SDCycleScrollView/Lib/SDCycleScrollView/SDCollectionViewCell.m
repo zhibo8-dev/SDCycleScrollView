@@ -33,9 +33,12 @@
 #import "SDCollectionViewCell.h"
 #import "UIView+SDExtension.h"
 
+static const CGFloat kAdvertWidth = 26.0f;
+
 @implementation SDCollectionViewCell
 {
     __weak UILabel *_titleLabel;
+    UILabel *_adLabel;
     UIView *bottomView;
 }
 
@@ -84,6 +87,20 @@
     _titleLabel = titleLabel;
     _titleLabel.hidden = YES;
     [self.contentView addSubview:titleLabel];
+    
+    
+    _adLabel = [[UILabel alloc] init];
+    _adLabel.layer.cornerRadius = 4.0;
+    _adLabel.font = [UIFont systemFontOfSize:9];
+    _adLabel.textAlignment = NSTextAlignmentCenter;
+    _adLabel.clipsToBounds = YES;
+    _adLabel.layer.borderColor = [UIColor colorWithRed:188.0/255.0 green:188.0/255.0 blue:188.0/255.0 alpha:1.0].CGColor;
+    _adLabel.layer.borderWidth = 1.0f;
+    _adLabel.backgroundColor = [UIColor clearColor];
+    _adLabel.hidden = YES;
+    _adLabel.textColor = [UIColor colorWithRed:188.0/255.0 green:188.0/255.0 blue:188.0/255.0 alpha:1.0];
+    _adLabel.text = @"广告";
+    [self.contentView addSubview:_adLabel];
 }
 
 - (void)setTitle:(NSString *)title
@@ -101,6 +118,12 @@
     _titleLabel.textAlignment = titleLabelTextAlignment;
 }
 
+- (void)setIsAd:(BOOL)isAd
+{
+    _isAd = isAd;
+    _adLabel.hidden = !isAd;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -110,11 +133,15 @@
     } else {
         _imageView.frame = self.bounds;
         CGFloat titleLabelW = self.sd_width - _rightMargin - 12;
+        if (_isAd) {
+            titleLabelW -= kAdvertWidth;
+        }
         CGFloat titleLabelH = _titleLabelHeight;
         CGFloat titleLabelX = 0;
         CGFloat titleLabelY = self.sd_height - titleLabelH;
         _titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
         bottomView.frame = CGRectMake(titleLabelX, titleLabelY, self.sd_width, titleLabelH);
+        _adLabel.frame = CGRectMake(titleLabelW, _titleLabel.center.y - (kAdvertWidth / 2.0 / 2.0), kAdvertWidth, kAdvertWidth / 2.0);
     }
 }
 

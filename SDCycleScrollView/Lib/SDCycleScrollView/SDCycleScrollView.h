@@ -87,6 +87,9 @@ typedef enum {
 /** 本地图片数组 */
 @property (nonatomic, strong) NSArray *localizationImageNamesGroup;
 
+/** 广告显示数组 */
+@property (nonatomic, assign) NSIndexSet *showAdvertIndex;
+
 
 
 

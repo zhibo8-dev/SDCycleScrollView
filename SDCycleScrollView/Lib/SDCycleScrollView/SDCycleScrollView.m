@@ -544,6 +544,11 @@ NSString * const ID = @"cycleCell";
 {
     SDCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
     cell.rightMargin = self.pageControl.frame.size.width;
+    if ([_showAdvertIndex containsIndex:indexPath.row]) {
+        cell.isAd = YES;
+    } else {
+        cell.isAd = NO;
+    }
     long itemIndex = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
     
     NSString *imagePath = self.imagePathsGroup[itemIndex];
