@@ -544,13 +544,13 @@ NSString * const ID = @"cycleCell";
 {
     SDCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
     cell.rightMargin = self.pageControl.frame.size.width;
-    if ([_showAdvertIndex containsIndex:indexPath.row]) {
+    long itemIndex = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
+    if ([_showAdvertIndex containsIndex:itemIndex]) {
         cell.isAd = YES;
     } else {
         cell.isAd = NO;
     }
-    long itemIndex = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
-    
+
     NSString *imagePath = self.imagePathsGroup[itemIndex];
     
     if (!self.onlyDisplayText && [imagePath isKindOfClass:[NSString class]]) {
