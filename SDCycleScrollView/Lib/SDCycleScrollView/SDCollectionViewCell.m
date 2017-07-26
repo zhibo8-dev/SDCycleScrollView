@@ -122,6 +122,7 @@ static const CGFloat kAdvertWidth = 26.0f;
 {
     _isAd = isAd;
     _adLabel.hidden = !isAd;
+    [self layoutSubviews];
 }
 
 - (void)layoutSubviews
