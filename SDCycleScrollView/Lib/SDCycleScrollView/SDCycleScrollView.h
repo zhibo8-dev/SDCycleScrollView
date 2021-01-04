@@ -89,6 +89,7 @@ typedef enum {
 
 /** 广告显示数组 */
 @property (nonatomic, strong) NSIndexSet *showAdvertIndex;
+@property (nonatomic, assign) CGFloat imageCornerRadius;
 
 
 

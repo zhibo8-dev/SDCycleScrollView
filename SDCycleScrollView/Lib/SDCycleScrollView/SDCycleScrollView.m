@@ -560,6 +560,10 @@ NSString * const ID = @"cycleCell";
 
     NSString *imagePath = self.imagePathsGroup[itemIndex];
     
+    if (self.imageCornerRadius) {
+        cell.imageView.layer.cornerRadius = self.imageCornerRadius;
+        cell.imageView.layer.masksToBounds = YES;
+    }
     if (!self.onlyDisplayText && [imagePath isKindOfClass:[NSString class]]) {
         if ([imagePath hasPrefix:@"http"]) {
             [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:self.placeholderImage];
