@@ -577,10 +577,6 @@ NSString * const ID = @"cycleCell";
     } else if (!self.onlyDisplayText && [imagePath isKindOfClass:[UIImage class]]) {
         cell.imageView.image = (UIImage *)imagePath;
     }
-    
-    if (_titlesGroup.count && itemIndex < _titlesGroup.count) {
-        cell.title = _titlesGroup[itemIndex];
-    }
         
     if (!cell.hasConfigured) {
         cell.titleLabelBackgroundColor = self.titleLabelBackgroundColor;
@@ -592,6 +588,13 @@ NSString * const ID = @"cycleCell";
         cell.imageView.contentMode = self.bannerImageViewContentMode;
         cell.clipsToBounds = YES;
         cell.onlyDisplayText = self.onlyDisplayText;
+        cell.bottomGradualViewHeight = self.bottomGradualViewHeight;
+        cell.titleTopMargin = self.titleTopMargin;
+        cell.titleNumberOfLines = self.titleNumberOfLines;
+    }
+    
+    if (_titlesGroup.count && itemIndex < _titlesGroup.count) {
+        cell.title = _titlesGroup[itemIndex];
     }
     
     return cell;

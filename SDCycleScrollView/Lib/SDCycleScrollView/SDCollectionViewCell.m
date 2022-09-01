@@ -88,7 +88,6 @@ static const CGFloat kAdvertWidth = 26.0f;
     _titleLabel.hidden = YES;
     [self.contentView addSubview:titleLabel];
     
-    
     _adLabel = [[UILabel alloc] init];
     _adLabel.layer.cornerRadius = 4.0;
     _adLabel.font = [UIFont systemFontOfSize:9];
@@ -106,7 +105,11 @@ static const CGFloat kAdvertWidth = 26.0f;
 - (void)setTitle:(NSString *)title
 {
     _title = [title copy];
-    _titleLabel.text = [NSString stringWithFormat:@"   %@", title];
+    if (self.titleTopMargin) {
+        _titleLabel.text = title;
+    } else {
+        _titleLabel.text = [NSString stringWithFormat:@"   %@", title];
+    }
     if (_titleLabel.hidden) {
         _titleLabel.hidden = NO;
     }
@@ -116,6 +119,11 @@ static const CGFloat kAdvertWidth = 26.0f;
 {
     _titleLabelTextAlignment = titleLabelTextAlignment;
     _titleLabel.textAlignment = titleLabelTextAlignment;
+}
+
+- (void)setTitleNumberOfLines:(NSInteger)titleNumberOfLines {
+    _titleNumberOfLines = titleNumberOfLines;
+    _titleLabel.numberOfLines = titleNumberOfLines;
 }
 
 - (void)setIsAd:(BOOL)isAd
@@ -137,13 +145,41 @@ static const CGFloat kAdvertWidth = 26.0f;
         if (_isAd) {
             titleLabelW -= kAdvertWidth;
         }
+        
         CGFloat titleLabelH = _titleLabelHeight;
         CGFloat titleLabelX = 0;
         CGFloat titleLabelY = self.sd_height - titleLabelH;
-        _titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
+        
+        if (self.titleTopMargin) {
+            CGSize size = [_titleLabel sizeThatFits:CGSizeMake(self.sd_width - 50, titleLabelH)];
+            _titleLabel.frame = CGRectMake(25, self.titleTopMargin, self.sd_width - 50, size.height);
+        } else {
+            _titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
+        }
+        
         bottomView.frame = CGRectMake(titleLabelX, titleLabelY, self.sd_width, titleLabelH);
         _adLabel.frame = CGRectMake(titleLabelW, _titleLabel.center.y - (kAdvertWidth / 2.0 / 2.0), kAdvertWidth, kAdvertWidth / 2.0);
+        if (_bottomGradualViewHeight) {
+            self.bottomGradualView.frame = CGRectMake(0, self.sd_height - _bottomGradualViewHeight, self.sd_width, _bottomGradualViewHeight);
+        }
     }
+}
+
+- (UIView *)bottomGradualView {
+    if (!_bottomGradualView) {
+        _bottomGradualView = [[UIView alloc] initWithFrame:CGRectMake(0,self.sd_height - _bottomGradualViewHeight,self.sd_width,_bottomGradualViewHeight)];
+        _bottomGradualView.backgroundColor = [UIColor clearColor];
+        [self.contentView insertSubview:_bottomGradualView aboveSubview:_imageView];
+        // gradient
+        CAGradientLayer *gl = [CAGradientLayer layer];
+        gl.frame = CGRectMake(0,0,self.sd_width,_bottomGradualViewHeight);
+        gl.startPoint = CGPointMake(0, 0);
+        gl.endPoint = CGPointMake(0, 1);
+        gl.colors = @[(__bridge id)[UIColor colorWithWhite:0 alpha:0.0].CGColor, (__bridge id)[UIColor colorWithWhite:0 alpha:0.5600].CGColor];
+        gl.locations = @[@(0), @(1.0f)];
+        [self.bottomGradualView.layer addSublayer:gl];
+    }
+    return _bottomGradualView;
 }
 
 @end

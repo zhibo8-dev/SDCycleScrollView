@@ -44,11 +44,15 @@
 @property (nonatomic, strong) UIFont *titleLabelTextFont;
 @property (nonatomic, strong) UIColor *titleLabelBackgroundColor;
 @property (nonatomic, assign) CGFloat titleLabelHeight;
+@property (nonatomic, assign) CGFloat titleTopMargin;
+@property (nonatomic, assign) NSInteger titleNumberOfLines;
 @property (nonatomic, assign) NSTextAlignment titleLabelTextAlignment;
 
 @property (nonatomic, assign) BOOL hasConfigured;
 
 /** 只展示文字轮播 */
 @property (nonatomic, assign) BOOL onlyDisplayText;
+@property (nonatomic, assign) CGFloat bottomGradualViewHeight;
+@property (nonatomic, strong) UIView *bottomGradualView;
 
 @end
