@@ -44,7 +44,7 @@
 @property (nonatomic, strong) UIFont *titleLabelTextFont;
 @property (nonatomic, strong) UIColor *titleLabelBackgroundColor;
 @property (nonatomic, assign) CGFloat titleLabelHeight;
-@property (nonatomic, assign) CGFloat titleTopMargin;
+@property (nonatomic, assign) CGFloat titleBottomMargin;
 @property (nonatomic, assign) NSInteger titleNumberOfLines;
 @property (nonatomic, assign) NSTextAlignment titleLabelTextAlignment;
 

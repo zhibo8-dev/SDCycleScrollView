@@ -177,8 +177,8 @@ typedef enum {
 /** 轮播文字label高度 */
 @property (nonatomic, assign) CGFloat titleLabelHeight;
 
-/** 轮播文字label顶部间距 */
-@property (nonatomic, assign) CGFloat titleTopMargin;
+/** 轮播文字label底部间距 */
+@property (nonatomic, assign) CGFloat titleBottomMargin;
 
 /** 轮播文字label行数 */
 @property (nonatomic, assign) NSInteger titleNumberOfLines;

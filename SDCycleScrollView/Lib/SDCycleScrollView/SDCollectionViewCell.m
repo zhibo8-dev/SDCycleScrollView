@@ -105,7 +105,7 @@ static const CGFloat kAdvertWidth = 26.0f;
 - (void)setTitle:(NSString *)title
 {
     _title = [title copy];
-    if (self.titleTopMargin) {
+    if (self.titleBottomMargin) {
         _titleLabel.text = title;
     } else {
         _titleLabel.text = [NSString stringWithFormat:@"   %@", title];
@@ -150,9 +150,9 @@ static const CGFloat kAdvertWidth = 26.0f;
         CGFloat titleLabelX = 0;
         CGFloat titleLabelY = self.sd_height - titleLabelH;
         
-        if (self.titleTopMargin) {
+        if (self.titleBottomMargin) {
             CGSize size = [_titleLabel sizeThatFits:CGSizeMake(self.sd_width - 50, titleLabelH)];
-            _titleLabel.frame = CGRectMake(25, self.titleTopMargin, self.sd_width - 50, size.height);
+            _titleLabel.frame = CGRectMake(25, self.sd_height - self.titleBottomMargin - size.height, self.sd_width - 50, size.height);
         } else {
             _titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
         }

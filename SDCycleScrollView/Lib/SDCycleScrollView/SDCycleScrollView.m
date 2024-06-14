@@ -589,7 +589,7 @@ NSString * const ID = @"cycleCell";
         cell.clipsToBounds = YES;
         cell.onlyDisplayText = self.onlyDisplayText;
         cell.bottomGradualViewHeight = self.bottomGradualViewHeight;
-        cell.titleTopMargin = self.titleTopMargin;
+        cell.titleBottomMargin = self.titleBottomMargin;
         cell.titleNumberOfLines = self.titleNumberOfLines;
     }
     
